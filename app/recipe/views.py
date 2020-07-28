@@ -37,6 +37,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
         """Override our current stated queryset to only display self.request.users recipes from the db table"""
         return self.queryset.filter(user=self.request.user)
 
+    def get_serializer_class(self):
+        """Return appropriate serializer_class"""
+        if self.action == 'retrieve':
+            return serializers.RecipeDetailSerializer
+        return self.serializer_class
+
 
     
     
